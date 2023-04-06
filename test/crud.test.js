@@ -88,5 +88,26 @@ describe('todoCrud', () => {
       expect(JSON.parse(localStorage.getItem('todos'))[0].completed).toBe(false);
     });
   });
+  
+  describe('removeTodo', () => {
+    it('removes a todo from the list', () => {
+      const todos = new Todos();
+      addTodo(Todo, todos, 'Test todo');
+      addTodo(Todo, todos, 'Another test todo');
+      removeTodo(0, todos);
+      expect(todos.todos.length).toBe(1);
+      expect(todos.todos[0].description).toBe('Another test todo');
+    });
+
+    it('saves the updated list to localStorage', () => {
+      const todos = new Todos();
+      addTodo(Todo, todos, 'Test todo');
+      addTodo(Todo, todos, 'Another test todo');
+      removeTodo(0, todos);
+      expect(localStorage.getItem('todos')).toBeTruthy();
+      expect(JSON.parse(localStorage.getItem('todos')).length).toBe(1);
+      expect(JSON.parse(localStorage.getItem('todos'))[0].description).toBe('Another test todo');
+    });
+  });
 
 });
