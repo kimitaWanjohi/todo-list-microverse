@@ -62,6 +62,10 @@ class Todos {
       this.todos = [...this.todos, ...todos];
     }
   }
+
+  render() {
+    // Do nothing
+  }
 }
 
 describe('todoCrud', () => {

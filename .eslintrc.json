@@ -18,7 +18,8 @@
         "js": "always", "json": "always"
       }],
       "max-classes-per-file": ["error", 2],
-      "import/no-unresolved": "off"
+      "import/no-unresolved": "off",
+      "class-methods-use-this": "off"
     },
     "ignorePatterns": [
       "coverage/",
