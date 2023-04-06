@@ -1,7 +1,6 @@
 // todoCrud.test.js
 import { addTodo, removeTodo } from '../src/todoCrud.js';
 
-
 /* eslint-disable no-unused-vars */
 const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
 /* eslint-enable no-unused-vars */
@@ -13,7 +12,7 @@ const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
 const localStorage = (() => {
   let store = {};
   return {
-    getItem: key => store[key],
+    getItem: (key) => store[key],
     setItem: (key, value) => {
       store[key] = value.toString();
     },
@@ -47,7 +46,7 @@ class Todos {
   }
 
   remove(todo) {
-    this.todos = this.todos.filter(t => t !== todo);
+    this.todos = this.todos.filter((t) => t !== todo);
     this.todos.forEach((t, i) => {
       t.index = i;
     });
@@ -62,10 +61,6 @@ class Todos {
     if (todos) {
       this.todos = [...this.todos, ...todos];
     }
-  }
-
-  render() {
-    // Do nothing
   }
 }
 
@@ -88,7 +83,7 @@ describe('todoCrud', () => {
       expect(JSON.parse(localStorage.getItem('todos'))[0].completed).toBe(false);
     });
   });
-  
+
   describe('removeTodo', () => {
     it('removes a todo from the list', () => {
       const todos = new Todos();
@@ -109,5 +104,4 @@ describe('todoCrud', () => {
       expect(JSON.parse(localStorage.getItem('todos'))[0].description).toBe('Another test todo');
     });
   });
-
 });

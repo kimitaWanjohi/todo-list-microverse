@@ -21,6 +21,8 @@
       "import/no-unresolved": "off"
     },
     "ignorePatterns": [
+      "coverage/",
+      "tests/",
       "public/",
       "postcss.config.js",
       "webpack.config.js",
