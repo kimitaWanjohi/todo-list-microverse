@@ -1,6 +1,6 @@
 // todoCrud.test.js
 import {
-  addTodo, removeTodo, editDescription, markCompleted,
+  addTodo, removeTodo, editDescription, markCompleted, clearCompleted
 } from '../src/todoCrud.js';
 
 /* eslint-disable no-unused-vars */
@@ -133,6 +133,15 @@ describe('todoCrud', () => {
       expect(localStorage.getItem('todos')).toBeTruthy();
       expect(JSON.parse(localStorage.getItem('todos')).length).toBe(1);
       expect(JSON.parse(localStorage.getItem('todos'))[0].completed).toBe(true);
+    });
+    describe('clearCompleted', () => {
+      it('clears all completed todos', () => {
+        const todos = new Todos();
+        addTodo(Todo, todos, 'Test todo');
+        addTodo(Todo, todos, 'Another test todo');
+        clearCompleted(todos);
+        expect(todos.todos[0].description).toBe('Test todo');
+      });
     });
   });
 });
