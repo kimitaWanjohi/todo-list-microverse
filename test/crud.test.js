@@ -1,6 +1,6 @@
 // todoCrud.test.js
 import {
-  addTodo, removeTodo, editDescription, markCompleted, clearCompleted
+  addTodo, removeTodo, editDescription, markCompleted, clearCompleted,
 } from '../src/todoCrud.js';
 
 /* eslint-disable no-unused-vars */
