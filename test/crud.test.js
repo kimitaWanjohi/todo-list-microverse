@@ -1,5 +1,7 @@
 // todoCrud.test.js
-import { addTodo, removeTodo, editDescription, markCompleted } from '../src/todoCrud.js';
+import {
+  addTodo, removeTodo, editDescription, markCompleted,
+} from '../src/todoCrud.js';
 
 /* eslint-disable no-unused-vars */
 const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
@@ -10,7 +12,7 @@ const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
 
 // Mock localStorage
 const localStorage = (() => {
-  let store = {}; // 
+  let store = {}; //
   return {
     getItem: (key) => store[key],
     setItem: (key, value) => {
