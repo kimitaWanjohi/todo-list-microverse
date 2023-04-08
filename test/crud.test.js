@@ -139,9 +139,11 @@ describe('todoCrud', () => {
         const todos = new Todos();
         addTodo(Todo, todos, 'Test todo');
         addTodo(Todo, todos, 'Another test todo');
+        markCompleted(1, todos);
         clearCompleted(todos);
-        expect(todos.todos[0].description).toBe('Test todo');
+        expect(todos.todos.length).toBe(1);
       });
     });
   });
 });
+
