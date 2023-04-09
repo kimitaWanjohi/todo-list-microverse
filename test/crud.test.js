@@ -1,5 +1,7 @@
 // todoCrud.test.js
-import { addTodo, removeTodo } from '../src/todoCrud.js';
+import {
+  addTodo, removeTodo, editDescription, markCompleted, clearCompleted,
+} from '../src/todoCrud.js';
 
 /* eslint-disable no-unused-vars */
 const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
@@ -10,7 +12,7 @@ const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
 
 // Mock localStorage
 const localStorage = (() => {
-  let store = {};
+  let store = {}; //
   return {
     getItem: (key) => store[key],
     setItem: (key, value) => {
@@ -106,6 +108,41 @@ describe('todoCrud', () => {
       expect(localStorage.getItem('todos')).toBeTruthy();
       expect(JSON.parse(localStorage.getItem('todos')).length).toBe(1);
       expect(JSON.parse(localStorage.getItem('todos'))[0].description).toBe('Another test todo');
+    });
+  });
+  describe('editDescription', () => {
+    it('edits the description of a todo', () => {
+      const todos = new Todos();
+      addTodo(Todo, todos, 'Test todo');
+      editDescription(1, todos, 'Test todo');
+      expect(todos.todos[0].description).toBe('Test todo');
+    });
+  });
+  describe('markCompleted', () => {
+    it('marks a todo as completed', () => {
+      const todos = new Todos();
+      addTodo(Todo, todos, 'Test todo');
+      markCompleted(1, todos);
+      expect(todos.todos[0].completed).toBe(true);
+    });
+
+    it('saves the updated list to localStorage', () => {
+      const todos = new Todos();
+      addTodo(Todo, todos, 'Test todo');
+      markCompleted(1, todos);
+      expect(localStorage.getItem('todos')).toBeTruthy();
+      expect(JSON.parse(localStorage.getItem('todos')).length).toBe(1);
+      expect(JSON.parse(localStorage.getItem('todos'))[0].completed).toBe(true);
+    });
+    describe('clearCompleted', () => {
+      it('clears all completed todos', () => {
+        const todos = new Todos();
+        addTodo(Todo, todos, 'Test todo');
+        addTodo(Todo, todos, 'Another test todo');
+        markCompleted(1, todos);
+        clearCompleted(todos);
+        expect(todos.todos.length).toBe(1);
+      });
     });
   });
 });
